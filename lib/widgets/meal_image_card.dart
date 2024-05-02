@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -51,15 +52,20 @@ class MealImageCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            //fade in widget allows you to have a placeholder image before the network image loads, and when the image is loaded, it fades in
-            //fade in image is a widget that loads an image from the network and fades it in when it is loaded
-            FadeInImage(
-                //putting the transparent image as a placeholder in the memoryImage widget
-                placeholder: MemoryImage(kTransparentImage),
-                image: NetworkImage(meal.imageUrl),
-                fit: BoxFit.cover,
-                height: 300,
-                width: double.infinity),
+            //Hero widget is used to animate a widget from one screen to another, it is used to create a shared element transition between two screens
+            Hero(
+              //it must have a unique tag, then we go to the screen we want to animate to and give the same tag to the widget we want to animate
+              tag: meal.id,
+              //fade in widget allows you to have a placeholder image before the network image loads, and when the image is loaded, it fades in
+              //fade in image is a widget that loads an image from the network and fades it in when it is loaded
+              child: FadeInImage(
+                  //putting the transparent image as a placeholder in the memoryImage widget
+                  placeholder: MemoryImage(kTransparentImage),
+                  image: NetworkImage(meal.imageUrl),
+                  fit: BoxFit.cover,
+                  height: 300,
+                  width: double.infinity),
+            ),
             Container(
               width: double.infinity,
               height: 70,

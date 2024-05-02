@@ -41,6 +41,7 @@ class MealsScreen extends StatelessWidget {
     if (meal.isEmpty) {
       content = Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Uh oh...nothing here yet!',
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
@@ -61,15 +62,15 @@ class MealsScreen extends StatelessWidget {
     //this is for the case where we are not viewing a category i.e tab bar favorites scrren
     if (title == null) {
       return content;
+    } else {
+      //if the title is not null, we will return a scaffold with the content
+      //this is for when we are viewing a category
+      return Scaffold(
+          backgroundColor: theme.colorScheme.background,
+          appBar: AppBar(
+            title: Text(title!),
+          ),
+          body: content);
     }
-
-    //if the title is not null, we will return a scaffold with the content
-    //this is for when we are viewing a category
-    return Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        appBar: AppBar(
-          title: Text(title!),
-        ),
-        body: content);
   }
 }
